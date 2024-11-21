@@ -35,19 +35,19 @@ def read_private_google_sheet(sheet_url: str, sheet_name: str):
     return df
 
 
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False, ttl=300)
 def get_employees() -> dict:
     df = read_private_google_sheet(st.secrets.DATABASE_URL, EMPLOYEE_SHEET)
     df_indexed = df.set_index('Email')
     return df_indexed.to_dict(orient='index')
 
 
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False, ttl=300)
 def get_answers() -> pd.DataFrame:
     return read_private_google_sheet(st.secrets.DATABASE_URL, ANSWER_SHEET)
 
 
-@st.cache_resource(show_spinner=False)
+@st.cache_resource(show_spinner=False, ttl=300)
 def get_redeem_history() -> pd.DataFrame:
     return read_private_google_sheet(st.secrets.DATABASE_URL, REDEEM_HISTORY_SHEET)
 
