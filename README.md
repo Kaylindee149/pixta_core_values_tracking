@@ -1,0 +1,2 @@
+- The Google Sheet file will act as a database
+- Before running the code, you need to share the Google Sheet file with the email address pixtacorevalues@pixtalab.iam.gserviceaccount.com
