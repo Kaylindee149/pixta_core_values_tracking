@@ -68,52 +68,63 @@ else:
         st.markdown(f"<h1 style='color: #3c58a1; font-weight: bold;'>"
                     "PIXTA Core Values Tracking</p>",
                     unsafe_allow_html=True)
-
-        st.subheader(f'Xin chào {user_info['general_info']['Họ và tên']}!')
-        st.write(f'Seniority: {user_info['general_info']["Seniority"]}')
-        st.write(f'Phòng ban: {user_info['general_info']["Phòng ban"]}')
-        st.write(f'Vị trí: {user_info['general_info']["Vị trí"]}')
+        try:
+            st.subheader(f'Xin chào {user_info['general_info']['Họ và tên']}!')
+            st.write(f'Seniority: {user_info['general_info']["Seniority"]}')
+            st.write(f'Phòng ban: {user_info['general_info']["Phòng ban"]}')
+            st.write(f'Vị trí: {user_info['general_info']["Vị trí"]}')
+        except Exception:
+            traceback.print_exc()
+            st.error('Có lỗi xảy ra khi hiển thị thông tin cá nhân.')
 
         st.divider()
 
         st.subheader('Câu trả lời')
-        answers = pd.DataFrame(
-            {
-                "Quarter": [x['Quarter'] for x in user_info['answers']],
-                "Câu trả lời": [
-                    x['1. Chia sẻ một câu chuyện mà bạn cảm thấy mình đã hành động dựa trên tinh thần, '
-                      'sự hướng dẫn của một hoặc nhiều Core Values.'] for x in user_info['answers']],
-                'Điểm': [x['Score'] for x in user_info['answers']],
-                "Ticket": [int(x['Ticket'].split()[0]) for x in user_info['answers']],
-            }
-        )
-        st.dataframe(
-            answers,
-            column_config={'Quarter': {'min_width': 100}, 'Câu trả lời': {'min_width': 500},
-                           'Điểm': {'min_width': 100}, 'Ticket': {'min_width': 100}},
-            hide_index=True,
-            use_container_width=True
-        )
-        total_tickets = sum(answers['Ticket'])
-
-        st.divider()
-        st.subheader('Lịch sử đổi quà')
-        df_history = pd.DataFrame(
-            {
-                "Ngày đổi": [x['Date'] for x in user_info['history']],
-                "Quà": [x['Gift'] for x in user_info['history']],
-                'Ticket': [int(x['Number of redeemed tickets'].split()[0]) for x in user_info['history']],
-            }
-        )
-        redeemed_tickets = 0
-        if df_history.empty:
-            st.write('Chưa có lịch sử đổi quà.')
-        else:
+        try:
+            answers = pd.DataFrame(
+                {
+                    "Quarter": [x['Quarter'] for x in user_info['answers']],
+                    "Câu trả lời": [
+                        x['1. Chia sẻ một câu chuyện mà bạn cảm thấy mình đã hành động dựa trên tinh thần, '
+                          'sự hướng dẫn của một hoặc nhiều Core Values.'] for x in user_info['answers']],
+                    'Điểm': [x['Score'] for x in user_info['answers']],
+                    "Ticket": [int(x['Ticket'].split()[0]) for x in user_info['answers']],
+                }
+            )
             st.dataframe(
-                df_history,
-                column_config={'Ngày đổi': {'min_width': 200}, 'Quà': {'min_width': 400}, 'Ticket': {'min_width': 100}},
+                answers,
+                column_config={'Quarter': {'min_width': 100}, 'Câu trả lời': {'min_width': 500},
+                               'Điểm': {'min_width': 100}, 'Ticket': {'min_width': 100}},
                 hide_index=True,
                 use_container_width=True
             )
-            redeemed_tickets = sum(df_history['Ticket'])
-        st.write(f'Số ticket còn lại: {total_tickets - redeemed_tickets}')
+            total_tickets = sum(answers['Ticket'])
+        except Exception:
+            traceback.print_exc()
+            st.error('Có lỗi xảy ra khi hiển thị câu trả lời.')
+
+        st.divider()
+        st.subheader('Lịch sử đổi quà')
+        try:
+            df_history = pd.DataFrame(
+                {
+                    "Ngày đổi": [x['Date'] for x in user_info['history']],
+                    "Quà": [x['Gift'] for x in user_info['history']],
+                    'Ticket': [int(x['Number of redeemed tickets'].split()[0]) for x in user_info['history']],
+                }
+            )
+            redeemed_tickets = 0
+            if df_history.empty:
+                st.write('Chưa có lịch sử đổi quà.')
+            else:
+                st.dataframe(
+                    df_history,
+                    column_config={'Ngày đổi': {'min_width': 200}, 'Quà': {'min_width': 400}, 'Ticket': {'min_width': 100}},
+                    hide_index=True,
+                    use_container_width=True
+                )
+                redeemed_tickets = sum(df_history['Ticket'])
+            st.write(f'Số ticket còn lại: {total_tickets - redeemed_tickets}')
+        except Exception:
+            traceback.print_exc()
+            st.error('Có lỗi xảy ra khi hiển thị lịch sử đổi quà.')
