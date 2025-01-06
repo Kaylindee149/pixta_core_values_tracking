@@ -4,9 +4,10 @@ import traceback
 import pandas as pd
 import streamlit as st
 import jwt
+from cookie import CookieManagerSingleton
 
 import database
-from cookie import CookieManagerSingleton
+
 
 st.set_page_config(page_title='PIXTA Core Values Tracking', layout='wide')
 st.logo('https://s.pimg.jp/pixta/assets/common/logo-blk'
@@ -55,9 +56,9 @@ if not st.session_state.is_logged_in:
                 st.session_state.user_info = database.get_info_by_email(email)
                 token = jwt.encode(st.session_state.user_info, st.secrets.JWT_SECRET, algorithm='HS256')
                 COOKIE_MANAGER.set(
-                    name=COOKIE_NAME,
-                    value=token,
-                    expires=datetime.datetime.now() + datetime.timedelta(days=30)
+                    cookie=COOKIE_NAME,
+                    val=token,
+                    expires_at=datetime.datetime.now() + datetime.timedelta(days=30)
                 )
                 st.rerun()
             else:

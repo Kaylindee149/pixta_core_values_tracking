@@ -1,4 +1,4 @@
-from streamlit_cookies_controller import CookieController
+import extra_streamlit_components as stx
 
 
 class SingletonMeta(type):
@@ -13,4 +13,4 @@ class SingletonMeta(type):
 class CookieManagerSingleton(metaclass=SingletonMeta):
     def __init__(self):
         # Initialization code here
-        self.cookie_manager = CookieController()
+        self.cookie_manager = stx.CookieManager()
