@@ -1,13 +1,23 @@
 import extra_streamlit_components as stx
 
+from threading import Lock
+
 
 class SingletonMeta(type):
-    _instance = None
+    _instances = {}
+
+    _lock: Lock = Lock()
+    """
+    We now have a lock object that will be used to synchronize threads during
+    first access to the Singleton.
+    """
 
     def __call__(cls, *args, **kwargs):
-        if cls._instance is None:
-            cls._instance = super().__call__(*args, **kwargs)
-        return cls._instance
+        with cls._lock:
+            if cls not in cls._instances:
+                instance = super().__call__(*args, **kwargs)
+                cls._instances[cls] = instance
+        return cls._instances[cls]
 
 
 class CookieManagerSingleton(metaclass=SingletonMeta):

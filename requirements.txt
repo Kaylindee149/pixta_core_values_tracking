@@ -5,3 +5,4 @@ pandas==2.2.3
 protobuf==5.28.3
 PyJWT==2.10.0
 extra-streamlit-components==0.1.71
+streamlit-javascript==0.1.5
