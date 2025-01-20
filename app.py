@@ -66,7 +66,10 @@ with center_cols[1]:
                 center_cols = st.columns([1, 3, 1])
                 with center_cols[1]:
                     submit_button = st.form_submit_button(label='Đăng nhập', use_container_width=True)
-
+                st.markdown(
+                    f"<p style='color: black; font-weight: normal; font-size: 20px;'>"
+                    "Không biết/Quên mật khẩu? Liên hệ GDO để lấy mật khẩu.</p>",
+                    unsafe_allow_html=True)
             if submit_button:
                 success = database.verify_user(email, password)
                 if success:
