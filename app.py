@@ -84,7 +84,6 @@ with center_cols[1]:
         with body.container():
             try:
                 st.subheader(f'Xin chào {user_info['general_info']['Họ và tên']}!')
-                st.write(f'Seniority: {user_info['general_info']["Seniority"]}')
                 st.write(f'Phòng ban: {user_info['general_info']["Phòng ban"]}')
                 st.write(f'Vị trí: {user_info['general_info']["Vị trí"]}')
             except Exception:
