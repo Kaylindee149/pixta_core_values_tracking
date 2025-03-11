@@ -140,7 +140,13 @@ with center_cols[1]:
                         use_container_width=True
                     )
                     redeemed_tickets = sum(df_history['Ticket'])
-                st.write(f'Số ticket còn lại: {total_tickets - redeemed_tickets}')
+                st.write(f'Số ticket còn lại: :admission_tickets: x {total_tickets - redeemed_tickets}')
             except Exception:
                 traceback.print_exc()
                 st.error('Có lỗi xảy ra khi hiển thị lịch sử đổi quà.')
+
+            st.subheader('Danh sách quà')
+            st.write(f':admission_tickets: x 3 - Các sản phẩm mang logo của công ty '
+                     f'(áo mưa :coat:, ba lô :handbag:, cốc :tea:,...)')
+            st.write(f':admission_tickets: x 5 - 01 Potonow voucher trị giá 300.000 VND :camera_with_flash:')
+            st.write(f':admission_tickets: x 8 - 01 ngày work-from-home :house:')
