@@ -146,7 +146,7 @@ with center_cols[1]:
                 st.error('Có lỗi xảy ra khi hiển thị lịch sử đổi quà.')
 
             st.subheader('Danh sách quà')
-            st.write(f':admission_tickets: x 3 - Các sản phẩm mang logo của công ty '
+            st.write(f':admission_tickets: x 2 - Các sản phẩm mang logo của công ty '
                      f'(áo mưa :coat:, ba lô :handbag:, cốc :tea:,...)')
-            st.write(f':admission_tickets: x 5 - 01 Potonow voucher trị giá 300.000 VND :camera_with_flash:')
-            st.write(f':admission_tickets: x 8 - 01 ngày work-from-home :house:')
+            st.write(f':admission_tickets: x 3 - 01 Potonow voucher trị giá 300.000 VND :camera_with_flash:')
+            st.write(f':admission_tickets: x 5 - 01 ngày work-from-home :house:')
